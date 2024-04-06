@@ -8,15 +8,29 @@ fred = Fred(api_key=fred_api_key)
 def main():
     st.title('FRED Data Explorer')
 
-    # User input for the FRED series ID
-    series_id = st.text_input('Enter FRED Series ID:', 'GDP')
+    t1, t2 = st.tabs(["GDP","DSPI"])
 
-    if st.button('Fetch Data'):
-        # Fetch the data
-        data = fred.get_series(series_id)
-        
-        # Display the data
-        st.line_chart(data)
+    with t1:
+        # User input for the FRED series ID
+        series_id = st.text_input('Enter FRED Series ID:', 'GDP')
+
+        if st.button('Fetch Data'):
+            # Fetch the data
+            data = fred.get_series(series_id)
+            
+            # Display the data
+            st.line_chart(data)
+
+    with t2:
+          # User input for the FRED series ID
+        series_id = st.text_input('Enter FRED Series ID:', 'GDP')
+
+        if st.button('Fetch Data'):
+            # Fetch the data
+            data = fred.get_series(series_id)
+            
+            # Display the data
+            st.line_chart(data)      
 
 if __name__ == "__main__":
     main()
