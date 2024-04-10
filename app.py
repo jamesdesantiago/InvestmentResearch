@@ -63,17 +63,11 @@ def consumer_behavior():
 def industrial_production():
     industrial_production = fred.get_series('INDPRO')
     manufacturing_production = fred.get_series('IPMAN')
-    durable_goods_production = fred.get_series('IPDG')
-    non_durable_goods_production = fred.get_series('IPND')
 
     st.markdown("Industrial Production")
     st.line_chart(industrial_production)
     st.markdown("Manufacturing Production")
     st.line_chart(manufacturing_production)
-    st.markdown("Durable Goods Production")
-    st.line_chart(durable_goods_production)
-    st.markdown("Non-Durable Goods Production")
-    st.line_chart(non_durable_goods_production)
 
 def financial_conditions():
     nfc_index = fred.get_series('NFCI')
