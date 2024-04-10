@@ -48,6 +48,7 @@ def labor_market(start_date, end_date):
     employment_level = fred.get_series('CE16OV', observation_start=start_date, observation_end=end_date)
     job_postings_in_us = fred.get_series('IHLIDXUS', observation_start=start_date, observation_end=end_date)
     wage_growth_tracker = fred.get_series('FRBATLWGT12MMUMHWGJST', observation_start=start_date, observation_end=end_date)
+    job_switcher = fred.get_series('FRBATLWGT3MMAUMHWGJMJSW', observation_start=start_date, observation_end=end_date)
     
     st.markdown("All Employees, Total Nonfarm (Thousands of Persons, Seasonally Adjusted)")
     st.line_chart(total_nonfarm_employees)
@@ -56,7 +57,9 @@ def labor_market(start_date, end_date):
     st.markdown("Job Postings on Indeed in the United States (Index Feb, 1 2020=100, Seasonally Adjusted)")
     st.line_chart(job_postings_in_us)
     st.markdown("12-Month Moving Average of Unweighted Median Hourly Wage Growth: Job Stayer (Percent Change from Year Ago, Not Seasonally Adjusted)")
-    st.line_chart(wage_growth_tracker)    
+    st.line_chart(wage_growth_tracker)
+    st.markdown("3-Month Moving Average of Unweighted Median Hourly Wage Growth: Job Switcher (Percent Change from Year Ago, Not Seasonally Adjusted)")
+    st.line_chart(job_switcher)       
 
 def consumer_behavior(start_date, end_date):
     personal_consumption_expenditures = fred.get_series('PCEC96', observation_start=start_date, observation_end=end_date)
