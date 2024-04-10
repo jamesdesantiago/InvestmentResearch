@@ -128,14 +128,11 @@ def economic_health():
     st.line_chart(lagging_index)
 
 def market_trends():
-    sp500pe_ratio = fred.get_series('MULTPL/SP500_PE_RATIO_MONTH')
     sp500_index = fred.get_series('SP500')
     dow_jones_index = fred.get_series('DJIA')
     nasdaq_index = fred.get_series('NASDAQCOM')
     russell_index = fred.get_series('RUI')
 
-    st.markdown("S&P 500 PE Ratio")
-    st.line_chart(sp500pe_ratio)
     st.markdown("S&P 500 Index")
     st.line_chart(sp500_index)
     st.markdown("Dow Jones Index")
