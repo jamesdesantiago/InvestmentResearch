@@ -10,7 +10,7 @@ fred = Fred(api_key=fred_api_key)
 def main():
     st.title('FRED Data Explorer')
 
-    t1, t2, t3, t4, t5,t5 = st.tabs(["Labor Market","Consumer Behavior & Inflation", "Industrial & Production", "Financial Conditions & Credit", "Economic Health & Outlook", "Market Trends & Valuation"])
+    t1, t2, t3, t4, t5, t6 = st.tabs(["Labor Market","Consumer Behavior & Inflation", "Industrial & Production", "Financial Conditions & Credit", "Economic Health & Outlook", "Market Trends & Valuation"])
 
     with t1:
         # Fetch the data
