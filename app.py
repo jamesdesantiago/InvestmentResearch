@@ -45,13 +45,13 @@ def labor_market(start_date, end_date):
     job_postings_in_us = fred.get_series('IHLIDXUS', observation_start=start_date, observation_end=end_date)
     wage_growth_tracker = fred.get_series('FRBATLWGT12MMUMHWGJST', observation_start=start_date, observation_end=end_date)
     
-    st.markdown("Total Nonfarm Employees")
+    st.markdown("All Employees, Total Nonfarm (Thousands of Persons, Seasonally Adjusted)")
     st.line_chart(total_nonfarm_employees)
-    st.markdown("Employment Level")
+    st.markdown("Employment Level (Thousands of Persons, Seasonally Adjusted)")
     st.line_chart(employment_level)
-    st.markdown("Job Postings in US")
+    st.markdown("Job Postings on Indeed in the United States (Index Feb, 1 2020=100, Seasonally Adjusted)")
     st.line_chart(job_postings_in_us)
-    st.markdown("Wage Growth Tracker")
+    st.markdown("12-Month Moving Average of Unweighted Median Hourly Wage Growth: Job Stayer (Percent Change from Year Ago, Not Seasonally Adjusted)")
     st.line_chart(wage_growth_tracker)    
 
 def consumer_behavior(start_date, end_date):
@@ -60,13 +60,13 @@ def consumer_behavior(start_date, end_date):
     real_disposable_personal_income = fred.get_series('W875RX1', observation_start=start_date, observation_end=end_date)
     retail_and_food_services_sales = fred.get_series('CMRMTSPL', observation_start=start_date, observation_end=end_date)
 
-    st.markdown("Personal Consumption Expenditures")
+    st.markdown("Real Personal Consumption Expenditures (Billions of Chained 2017 Dollars, Seasonally Adjusted Annual Rate)")
     st.line_chart(personal_consumption_expenditures)
-    st.markdown("Commercial Bank Credit")
+    st.markdown("Consumer Loans: Credit Cards and Other Revolving Plans, All Commercial Banks (Billions of U.S. Dollars, Seasonally Adjusted)")
     st.line_chart(commercial_bank_credit)
-    st.markdown("Real Disposable Personal Income")
+    st.markdown("Real personal income excluding current transfer receipts (Billions of Chained 2017 Dollars, Seasonally Adjusted Annual Rate)")
     st.line_chart(real_disposable_personal_income)
-    st.markdown("Retail and Food Services Sales")
+    st.markdown("Real Manufacturing and Trade Industries Sales (Millions of Chained 2017 Dollars, Seasonally Adjusted)")
     st.line_chart(retail_and_food_services_sales) 
 
 
@@ -74,9 +74,9 @@ def industrial_production(start_date, end_date):
     industrial_production = fred.get_series('INDPRO', observation_start=start_date, observation_end=end_date)
     manufacturing_production = fred.get_series('IPMAN', observation_start=start_date, observation_end=end_date)
 
-    st.markdown("Industrial Production")
+    st.markdown("Industrial Production: Total Index (Index 2017=100, Seasonally Adjusted)")
     st.line_chart(industrial_production)
-    st.markdown("Manufacturing Production")
+    st.markdown("Index 2017=100, Seasonally Adjusted")
     st.line_chart(manufacturing_production)
 
 def financial_conditions(start_date, end_date):
@@ -84,27 +84,21 @@ def financial_conditions(start_date, end_date):
     drtscilm_index = fred.get_series('DRTSCILM', observation_start=start_date, observation_end=end_date)
     totbkcr_index = fred.get_series('TOTBKCR', observation_start=start_date, observation_end=end_date)
 
-    st.markdown("National Financial Conditions Index")
+    st.markdown("Chicago Fed National Financial Conditions Index (Index, Not Seasonally Adjusted)")
     st.line_chart(nfc_index)
-    st.markdown("Delinquency Rate on All Loans")
+    st.markdown("Net Percentage of Domestic Banks Tightening Standards for Commercial and Industrial Loans to Large and Middle-Market Firms (Percent, Not Seasonally Adjusted)")
     st.line_chart(drtscilm_index)
-    st.markdown("Total Bank Credit")
+    st.markdown("Bank Credit, All Commercial Banks (Billions of U.S. Dollars, Seasonally Adjusted)")
     st.line_chart(totbkcr_index)
 
     st.markdown("---")
 
-    financial_conditions_index = fred.get_series('STLFSI', observation_start=start_date, observation_end=end_date)
-    financial_stress_index = fred.get_series('STLFSI2', observation_start=start_date, observation_end=end_date)
     financial_conditions_credit_spreads = fred.get_series('BAA10Y', observation_start=start_date, observation_end=end_date)
     financial_conditions_leverage_ratio = fred.get_series('TLAACBW027NBOG', observation_start=start_date, observation_end=end_date)
 
-    st.markdown("Financial Conditions Index")
-    st.line_chart(financial_conditions_index)
-    st.markdown("Financial Stress Index")
-    st.line_chart(financial_stress_index)
-    st.markdown("Credit Spreads")
+    st.markdown("Moody's Seasoned Baa Corporate Bond Yield Relative to Yield on 10-Year Treasury Constant Maturity (Percent, Not Seasonally Adjusted)")
     st.line_chart(financial_conditions_credit_spreads)
-    st.markdown("Leverage Ratio")
+    st.markdown("Total Assets, All Commercial Banks (Billions of U.S. Dollars, Not Seasonally Adjusted)")
     st.line_chart(financial_conditions_leverage_ratio)
 
 def economic_health(start_date, end_date):
@@ -113,13 +107,13 @@ def economic_health(start_date, end_date):
     recprous_series = fred.get_series('RECPROUSM156N', observation_start=start_date, observation_end=end_date)
     bbkmleix_series = fred.get_series('BBKMLEIX', observation_start=start_date, observation_end=end_date)
 
-    st.markdown("Assets: Total Assets Held Outright by the Federal Reserve")
+    st.markdown("Assets: Total Assets: Total Assets (Less Eliminations from Consolidation): Wednesday Level (Millions of U.S. Dollars, Not Seasonally Adjusted)")
     st.line_chart(walcl_series)
-    st.markdown("Recession Probability Index")
+    st.markdown("Real-time Sahm Rule Recession Indicator (Percentage Points, Seasonally Adjusted)")
     st.line_chart(sahmrealtime_series)
-    st.markdown("Recession Probability Index")
+    st.markdown("Smoothed U.S. Recession Probabilities (Percent, Not Seasonally Adjusted)")
     st.line_chart(recprous_series)
-    st.markdown("BBK Moody's Analytics Recession Indicator")
+    st.markdown("Brave-Butters-Kelley Leading Index (Standard Deviations, Seasonally Adjusted)")
     st.line_chart(bbkmleix_series)
 
     st.markdown("---")
@@ -128,11 +122,11 @@ def economic_health(start_date, end_date):
     coincident_index = fred.get_series('USPHCI', observation_start=start_date, observation_end=end_date)
     lagging_index = fred.get_series('M16005USM358SNBR', observation_start=start_date, observation_end=end_date)
 
-    st.markdown("Leading Index")
+    st.markdown("Leading Index for the United States (Percent, Seasonally Adjusted)")
     st.line_chart(leading_index)
-    st.markdown("Coincident Index")
+    st.markdown("Coincident Economic Activity Index for the United States (Index 2007=100, Seasonally Adjusted)")
     st.line_chart(coincident_index)
-    st.markdown("Lagging Index")
+    st.markdown("Composite Index of Three Lagging Indicators, Amplitude-Adjusted, Weighted for United States (Index Jan 1948=100, Seasonally Adjusted)")
     st.line_chart(lagging_index)
 
 def market_trends(start_date, end_date):
