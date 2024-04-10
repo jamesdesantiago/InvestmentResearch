@@ -59,21 +59,6 @@ def consumer_behavior():
     st.markdown("Retail and Food Services Sales")
     st.line_chart(retail_and_food_services_sales) 
 
-    st.markdown("---")
-
-    st.markdown("Consumer Sentiment")
-    consumer_sentiment = fred.get_series('UMCSENT')
-    st.markdown("Consumer Spending")
-    consumer_spending = fred.get_series('PCE')
-    st.markdown("Consumer Debt")
-    consumer_debt = fred.get_series('CMDEBT')
-    st.markdown("Consumer Credit")
-    consumer_credit = fred.get_series('TOTALSL')
-    
-    st.line_chart(consumer_sentiment)
-    st.line_chart(consumer_spending)
-    st.line_chart(consumer_debt)
-    st.line_chart(consumer_credit) 
 
 def industrial_production():
     industrial_production = fred.get_series('INDPRO')
