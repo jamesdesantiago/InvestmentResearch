@@ -131,7 +131,6 @@ def market_trends():
     sp500_index = fred.get_series('SP500')
     dow_jones_index = fred.get_series('DJIA')
     nasdaq_index = fred.get_series('NASDAQCOM')
-    russell_index = fred.get_series('RUI')
 
     st.markdown("S&P 500 Index")
     st.line_chart(sp500_index)
@@ -139,8 +138,6 @@ def market_trends():
     st.line_chart(dow_jones_index)
     st.markdown("NASDAQ Index")
     st.line_chart(nasdaq_index)
-    st.markdown("Russell 1000 Index")
-    st.line_chart(russell_index)
 
     st.markdown("---")
 
