@@ -1,6 +1,8 @@
 import streamlit as st
 from fredapi import Fred
 
+st.set_page_config(layout="wide")
+
 # Your FRED API Key
 fred_api_key = st.secrets["FRED_API"]
 fred = Fred(api_key=fred_api_key)
@@ -116,10 +118,8 @@ def economic_health():
 
     leading_index = fred.get_series('USSLIND')
     coincident_index = fred.get_series('USPHCI')
-    lagging_index = fred.get_series('USLGIND')
+    lagging_index = fred.get_series('M16005USM358SNBR')
     leading_index_growth_rate = fred.get_series('USSLINDGROW')
-    coincident_index_growth_rate = fred.get_series('USCOINDGROW')
-    lagging_index_growth_rate = fred.get_series('USLGINDGROW')
 
     st.markdown("Leading Index")
     st.line_chart(leading_index)
@@ -129,10 +129,6 @@ def economic_health():
     st.line_chart(lagging_index)
     st.markdown("Leading Index Growth Rate")
     st.line_chart(leading_index_growth_rate)
-    st.markdown("Coincident Index Growth Rate")
-    st.line_chart(coincident_index_growth_rate)
-    st.markdown("Lagging Index Growth Rate")
-    st.line_chart(lagging_index_growth_rate)
 
 def market_trends():
     sp500pe_ratio = fred.get_series('MULTPL/SP500_PE_RATIO_MONTH')
