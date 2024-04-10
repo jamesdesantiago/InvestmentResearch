@@ -14,7 +14,7 @@ def main():
     # Date range picker
     start_date, end_date = st.sidebar.date_input(
         "Select Date Range",
-        value=[datetime(2020, 1, 1), datetime(2023, 1, 1)],
+        value=[datetime(2000, 1, 1), datetime.today()],
         min_value=datetime(2000, 1, 1),
         max_value=datetime.today()
     )
