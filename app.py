@@ -115,7 +115,7 @@ def economic_health():
     st.markdown("---")
 
     leading_index = fred.get_series('USSLIND')
-    coincident_index = fred.get_series('USCOIND')
+    coincident_index = fred.get_series('USPHCI')
     lagging_index = fred.get_series('USLGIND')
     leading_index_growth_rate = fred.get_series('USSLINDGROW')
     coincident_index_growth_rate = fred.get_series('USCOINDGROW')
