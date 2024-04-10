@@ -119,7 +119,6 @@ def economic_health():
     leading_index = fred.get_series('USSLIND')
     coincident_index = fred.get_series('USPHCI')
     lagging_index = fred.get_series('M16005USM358SNBR')
-    leading_index_growth_rate = fred.get_series('USSLINDGROW')
 
     st.markdown("Leading Index")
     st.line_chart(leading_index)
@@ -127,8 +126,6 @@ def economic_health():
     st.line_chart(coincident_index)
     st.markdown("Lagging Index")
     st.line_chart(lagging_index)
-    st.markdown("Leading Index Growth Rate")
-    st.line_chart(leading_index_growth_rate)
 
 def market_trends():
     sp500pe_ratio = fred.get_series('MULTPL/SP500_PE_RATIO_MONTH')
