@@ -35,9 +35,13 @@ def labor_market():
     job_postings_in_us = fred.get_series('IHLIDXUS')
     wage_growth_tracker = fred.get_series('FRBATLWGT12MMUMHWGJST')
     
+    st.markdown("Total Nonfarm Employees")
     st.line_chart(total_nonfarm_employees)
+    st.markdown("Employment Level")
     st.line_chart(employment_level)
+    st.markdown("Job Postings in US")
     st.line_chart(job_postings_in_us)
+    st.markdown("Wage Growth Tracker")
     st.line_chart(wage_growth_tracker)    
 
 def consumer_behavior():
@@ -46,16 +50,24 @@ def consumer_behavior():
     real_disposable_personal_income = fred.get_series('W875RX1')
     retail_and_food_services_sales = fred.get_series('CMRMTSPL')
 
+    st.markdown("Personal Consumption Expenditures")
     st.line_chart(personal_consumption_expenditures)
+    st.markdown("Commercial Bank Credit")
     st.line_chart(commercial_bank_credit)
+    st.markdown("Real Disposable Personal Income")
     st.line_chart(real_disposable_personal_income)
+    st.markdown("Retail and Food Services Sales")
     st.line_chart(retail_and_food_services_sales) 
 
     st.markdown("---")
 
+    st.markdown("Consumer Sentiment")
     consumer_sentiment = fred.get_series('UMCSENT')
+    st.markdown("Consumer Spending")
     consumer_spending = fred.get_series('PCE')
+    st.markdown("Consumer Debt")
     consumer_debt = fred.get_series('CMDEBT')
+    st.markdown("Consumer Credit")
     consumer_credit = fred.get_series('TOTALSL')
     
     st.line_chart(consumer_sentiment)
@@ -69,9 +81,13 @@ def industrial_production():
     durable_goods_production = fred.get_series('IPDG')
     non_durable_goods_production = fred.get_series('IPND')
 
+    st.markdown("Industrial Production")
     st.line_chart(industrial_production)
+    st.markdown("Manufacturing Production")
     st.line_chart(manufacturing_production)
+    st.markdown("Durable Goods Production")
     st.line_chart(durable_goods_production)
+    st.markdown("Non-Durable Goods Production")
     st.line_chart(non_durable_goods_production)
 
 def financial_conditions():
@@ -79,8 +95,11 @@ def financial_conditions():
     drtscilm_index = fred.get_series('DRTSCILM')
     totbkcr_index = fred.get_series('TOTBKCR')
 
+    st.markdown("National Financial Conditions Index")
     st.line_chart(nfc_index)
+    st.markdown("Delinquency Rate on All Loans")
     st.line_chart(drtscilm_index)
+    st.markdown("Total Bank Credit")
     st.line_chart(totbkcr_index)
 
     st.markdown("---")
@@ -90,9 +109,13 @@ def financial_conditions():
     financial_conditions_credit_spreads = fred.get_series('BAA10Y')
     financial_conditions_leverage_ratio = fred.get_series('TLAACBW027NBOG')
 
+    st.markdown("Financial Conditions Index")
     st.line_chart(financial_conditions_index)
+    st.markdown("Financial Stress Index")
     st.line_chart(financial_stress_index)
+    st.markdown("Credit Spreads")
     st.line_chart(financial_conditions_credit_spreads)
+    st.markdown("Leverage Ratio")
     st.line_chart(financial_conditions_leverage_ratio)
 
 def economic_health():
@@ -101,9 +124,13 @@ def economic_health():
     recprous_series = fred.get_series('RECPROUSM156N')
     bbkmleix_series = fred.get_series('BBKMLEIX')
 
+    st.markdown("Assets: Total Assets Held Outright by the Federal Reserve")
     st.line_chart(walcl_series)
+    st.markdown("Recession Probability Index")
     st.line_chart(sahmrealtime_series)
+    st.markdown("Recession Probability Index")
     st.line_chart(recprous_series)
+    st.markdown("BBK Moody's Analytics Recession Indicator")
     st.line_chart(bbkmleix_series)
 
     st.markdown("---")
@@ -115,11 +142,17 @@ def economic_health():
     coincident_index_growth_rate = fred.get_series('USCOINDGROW')
     lagging_index_growth_rate = fred.get_series('USLGINDGROW')
 
+    st.markdown("Leading Index")
     st.line_chart(leading_index)
+    st.markdown("Coincident Index")
     st.line_chart(coincident_index)
+    st.markdown("Lagging Index")
     st.line_chart(lagging_index)
+    st.markdown("Leading Index Growth Rate")
     st.line_chart(leading_index_growth_rate)
+    st.markdown("Coincident Index Growth Rate")
     st.line_chart(coincident_index_growth_rate)
+    st.markdown("Lagging Index Growth Rate")
     st.line_chart(lagging_index_growth_rate)
 
 def market_trends():
@@ -129,10 +162,15 @@ def market_trends():
     nasdaq_index = fred.get_series('NASDAQCOM')
     russell_index = fred.get_series('RUI')
 
+    st.markdown("S&P 500 PE Ratio")
     st.line_chart(sp500pe_ratio)
+    st.markdown("S&P 500 Index")
     st.line_chart(sp500_index)
+    st.markdown("Dow Jones Index")
     st.line_chart(dow_jones_index)
+    st.markdown("NASDAQ Index")
     st.line_chart(nasdaq_index)
+    st.markdown("Russell 1000 Index")
     st.line_chart(russell_index)
 
     st.markdown("---")
@@ -143,10 +181,15 @@ def market_trends():
     treasury_yield_3m = fred.get_series('TB3MS')
     treasury_yield_5y = fred.get_series('GS5')
 
+    st.markdown("VIX Index")
     st.line_chart(vix_index)
+    st.markdown("10-Year Treasury Yield")
     st.line_chart(treasury_yield_10y)
+    st.markdown("2-Year Treasury Yield")
     st.line_chart(treasury_yield_2y)
+    st.markdown("3-Month Treasury Yield")
     st.line_chart(treasury_yield_3m)
+    st.markdown("5-Year Treasury Yield")
     st.line_chart(treasury_yield_5y)
 
 if __name__ == "__main__":
