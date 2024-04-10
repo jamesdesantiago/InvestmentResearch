@@ -17,7 +17,10 @@ def main():
         value=[datetime(2020, 1, 1), datetime(2023, 1, 1)],
         min_value=datetime(2000, 1, 1),
         max_value=datetime.today()
-    ).strftime('%Y-%m-%d')
+    )
+    # Format dates as strings
+    start_date_str = start_date.strftime('%Y-%m-%d')
+    end_date_str = end_date.strftime('%Y-%m-%d')
 
     t1, t2, t3, t4, t5, t6 = st.tabs(["Labor Market","Consumer Behavior & Inflation", "Industrial & Production", "Financial Conditions & Credit", "Economic Health & Outlook", "Market Trends & Valuation"])
 
