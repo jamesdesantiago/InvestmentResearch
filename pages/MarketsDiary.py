@@ -23,11 +23,13 @@ def load_data(url):
 def main():
     st.title("Market Data Viewer")
     # URL of the JSON data
-    url = "https://www.wsj.com/market-data/stocks/marketsdiary?id=%7B%22application%22%3A%22WSJ%22%2C%22marketsDiaryType%22%3A%22diaries%22%7D&type=mdc_marketsdiary"
+    url1 = "https://www.wsj.com/market-data/stocks/marketsdiary?id=%7B%22application%22%3A%22WSJ%22%2C%22marketsDiaryType%22%3A%22diaries%22%7D&type=mdc_marketsdiary"
+    url2 = "https://www.wsj.com/market-data/stocks/marketsdiary?id=%7B%22application%22%3A%22WSJ%22%2C%22marketsDiaryType%22%3A%22breakdownOfVolumes%22%7D&type=mdc_marketsdiary"
+    url3 = "https://www.wsj.com/market-data/stocks/marketsdiary?id=%7B%22application%22%3A%22WSJ%22%2C%22marketsDiaryType%22%3A%22weeklyTotals%22%7D&type=mdc_marketsdiary"
     
     if st.button("Load Data"):
         # Loading data
-        data = load_data(url)
+        data = load_data(url1)
         # Displaying the DataFrame in Streamlit
         st.write(data)
 
