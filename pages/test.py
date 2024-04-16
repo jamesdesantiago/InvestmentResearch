@@ -1,6 +1,5 @@
-import streamlit as st
-import pandas as pd
 import requests
+import pandas as pd
 
 def fetch_data(url):
     headers = {
@@ -48,20 +47,6 @@ urls = [
     "https://www.wsj.com/market-data/stocks/marketsdiary?id=%7B%22application%22%3A%22WSJ%22%2C%22marketsDiaryType%22%3A%22weeklyTotals%22%7D&type=mdc_marketsdiary"
 ]
 
-def main():
-    st.title("WSJ Market Diary")
-    url_diaries = run_data_pull(urls[0])
-    url_breakdownOfVolumes = run_data_pull(urls[1])
-    url_weeklyTotals = run_data_pull(urls[2])
-
-    st.header("Diaries")
-    st.dataframe(url_diaries)
-
-    st.header("Breakdown of Volumes")
-    st.dataframe(url_breakdownOfVolumes)
-    
-    st.header("Weekly Totals")
-    st.dataframe(url_weeklyTotals)
-
-if __name__ == "__main__":
-    main()
+run_data_pull(urls[0])
+run_data_pull(urls[1])
+run_data_pull(urls[2])
