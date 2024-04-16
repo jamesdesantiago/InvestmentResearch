@@ -3,10 +3,21 @@ import pandas as pd
 import requests
 
 def load_data(url):
-    # Fetching the JSON data from the URL
     response = requests.get(url)
-    # Assuming the JSON structure allows direct conversion to DataFrame
-    data = pd.json_normalize(response.json())
+    
+    # Check the status code of the response
+    if response.status_code != 200:
+        print("Failed to fetch data: Status code", response.status_code)
+        print("Response body:", response.text)
+        return None
+    
+    try:
+        data = pd.json_normalize(response.json())
+    except ValueError as e:
+        print("Failed to decode JSON:", e)
+        print("Response content:", response.text)
+        return None
+    
     return data
 
 def main():
