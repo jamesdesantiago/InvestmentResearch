@@ -136,6 +136,15 @@ def economic_health(start_date, end_date):
     st.markdown("Composite Index of Three Lagging Indicators, Amplitude-Adjusted, Weighted for United States (Index Jan 1948=100, Seasonally Adjusted)")
     st.line_chart(lagging_index)
 
+def yield_curve(start_date, end_date):
+    data = {
+        '10-Year': fred.get_series('GS10', observation_start=start_date, observation_end=end_date),
+        '2-Year': fred.get_series('GS2', observation_start=start_date, observation_end=end_date),
+        '3-Month': fred.get_series('TB3MS', observation_start=start_date, observation_end=end_date),
+        '5-Year': fred.get_series('GS5', observation_start=start_date, observation_end=end_date)
+    }
+    return pd.DataFrame(data)
+
 def market_trends(start_date, end_date):
     sp500_index = fred.get_series('SP500', observation_start=start_date, observation_end=end_date)
     dow_jones_index = fred.get_series('DJIA', observation_start=start_date, observation_end=end_date)
@@ -151,21 +160,26 @@ def market_trends(start_date, end_date):
     st.markdown("---")
 
     vix_index = fred.get_series('VIXCLS', observation_start=start_date, observation_end=end_date)
-    treasury_yield_10y = fred.get_series('GS10', observation_start=start_date, observation_end=end_date)
-    treasury_yield_2y = fred.get_series('GS2', observation_start=start_date, observation_end=end_date)
-    treasury_yield_3m = fred.get_series('TB3MS', observation_start=start_date, observation_end=end_date)
-    treasury_yield_5y = fred.get_series('GS5', observation_start=start_date, observation_end=end_date)
 
     st.markdown("VIX Index")
     st.line_chart(vix_index)
-    st.markdown("10-Year Treasury Yield")
-    st.line_chart(treasury_yield_10y)
-    st.markdown("2-Year Treasury Yield")
-    st.line_chart(treasury_yield_2y)
-    st.markdown("3-Month Treasury Yield")
-    st.line_chart(treasury_yield_3m)
-    st.markdown("5-Year Treasury Yield")
-    st.line_chart(treasury_yield_5y)
+
+    yc = yield_curve(start_date, end_date)
+
+    # Plotting
+    fig = go.Figure()
+
+    for column in yc.columns:
+        fig.add_trace(go.Scatter3d(x=yc.index, y=[column]*len(yc), z=yc[column],
+                                mode='lines', name=column))
+
+    fig.update_layout(scene=dict(
+        xaxis_title='Date',
+        yaxis_title='Maturity',
+        zaxis_title='Yield (%)'
+    ))
+
+    st.plotly_chart(fig, use_container_width=True)
 
 if __name__ == "__main__":
     main()
