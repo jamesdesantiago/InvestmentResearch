@@ -161,10 +161,9 @@ def market_trends(start_date, end_date):
     yield_curve_data = yield_curve(start_date, end_date)
     fig = go.Figure()
     for column in yield_curve_data.columns:
-        fig.add_trace(go.Scatter3d(x=yield_curve_data.index, y=[column]*len(yield_curve_data), z=yield_curve_data[column],
-                                   mode='lines', name=column))
+        fig.add_trace(go.Scatter(x=yield_curve_data.index, y=yield_curve_data[column], mode='lines', name=column))
 
-    fig.update_layout(scene=dict(xaxis_title='Date', yaxis_title='Maturity', zaxis_title='Yield (%)'))
+    fig.update_layout(title='U.S. Treasury Yield Curve', xaxis_title='Date', yaxis_title='Yield (%)', yaxis=dict(autorange=True))
     st.plotly_chart(fig, use_container_width=True)
 
 def yield_curve(start_date, end_date):
