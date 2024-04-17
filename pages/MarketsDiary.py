@@ -40,19 +40,22 @@ def process_data(data):
         if 'instruments' in data['data']:
             return pd.json_normalize(data['data']['instruments'])
         elif 'instrumentSets' in data['data']:
-            # Process each instrument set
+            # Create an empty DataFrame to store the combined data
+            combined_df = pd.DataFrame()
+            # Iterate through each set of instruments for different markets
             for set_ in data['data']['instrumentSets']:
-                # Extract market name from headerFields
+                # Extract the market name from headerFields
                 market_name = [field['label'] for field in set_['headerFields'] if field['value'] == 'name'][0]
 
-                # Convert instruments to DataFrame
+                # Convert the instruments to DataFrame
                 instruments_df = pd.DataFrame(set_['instruments'])
 
                 # Add a column for the market name
                 instruments_df['Market'] = market_name
 
-                # Append to the combined DataFrame
-                return instruments_df
+                # Append this market's data to the combined DataFrame
+                combined_df = pd.concat([combined_df, instruments_df], ignore_index=True)
+                return combined_df
         elif 'indexes' in data['data']:
             return pd.json_normalize(data['data']['indexes'])
         else:
