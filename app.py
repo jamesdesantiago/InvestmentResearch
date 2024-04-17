@@ -1,6 +1,7 @@
 import streamlit as st
 from fredapi import Fred
 from datetime import datetime
+import plotly.graph_objects as go
 
 st.set_page_config(layout="wide")
 
