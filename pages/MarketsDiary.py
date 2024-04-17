@@ -28,15 +28,15 @@ def process_data(data):
             for set_ in data['data']['instrumentSets']:
                 # Extract market name from headerFields
                 market_name = [field['label'] for field in set_['headerFields'] if field['value'] == 'name'][0]
-
+                return market_name
                 # Convert instruments to DataFrame
-                instruments_df = pd.DataFrame(set_['instruments'])
+                #instruments_df = pd.DataFrame(set_['instruments'])
 
                 # Add a column for the market name
-                instruments_df['Market'] = market_name
+                #instruments_df['Market'] = market_name
 
                 # Append to the combined DataFrame
-                combined_df = pd.concat([combined_df, instruments_df], ignore_index=True)
+                #combined_df = pd.concat([combined_df, instruments_df], ignore_index=True)
                 return combined_df
             frames = [pd.json_normalize(set_['instruments']) for set_ in data['data']['instrumentSets']]
             return pd.concat(frames, ignore_index=True)
