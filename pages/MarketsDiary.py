@@ -55,7 +55,7 @@ def process_data(data):
 
                 # Append this market's data to the combined DataFrame
                 combined_df = pd.concat([combined_df, instruments_df], ignore_index=True)
-                return combined_df
+            return combined_df
         elif 'indexes' in data['data']:
             return pd.json_normalize(data['data']['indexes'])
         else:
