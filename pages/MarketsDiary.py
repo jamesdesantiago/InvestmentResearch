@@ -18,14 +18,41 @@ def fetch_data(url):
             print(f"Response: {response.text}")
             return None
 
+def fetch_data(url):
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
+    }
+    
+    with requests.Session() as session:
+        session.headers.update(headers)
+        response = session.get(url, allow_redirects=True)
+
+        if response.status_code == 200:
+            return response.json()  # Return JSON data
+        else:
+            print(f"Failed to fetch data. Status code: {response.status_code}")
+            print(f"Response: {response.text}")
+            return None
+
 def process_data(data):
     try:
         # Check for different data structures and process accordingly
         if 'instruments' in data['data']:
             return pd.json_normalize(data['data']['instruments'])
         elif 'instrumentSets' in data['data']:
-            frames = [pd.json_normalize(set_['instruments']) for set_ in data['data']['instrumentSets']]
-            return pd.concat(frames, ignore_index=True)
+            # Process each instrument set
+            for set_ in data['data']['instrumentSets']:
+                # Extract market name from headerFields
+                market_name = [field['label'] for field in set_['headerFields'] if field['value'] == 'name'][0]
+
+                # Convert instruments to DataFrame
+                instruments_df = pd.DataFrame(set_['instruments'])
+
+                # Add a column for the market name
+                instruments_df['Market'] = market_name
+
+                # Append to the combined DataFrame
+                return instruments_df
         elif 'indexes' in data['data']:
             return pd.json_normalize(data['data']['indexes'])
         else:
@@ -38,7 +65,6 @@ def process_data(data):
 def run_data_pull(url):
     json_data = fetch_data(url)
     df = process_data(json_data)
-    print(df.head())
     return df
 
 # URLs with different query parameters
