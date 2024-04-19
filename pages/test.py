@@ -1,4 +1,3 @@
-import streamlit as st
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
@@ -24,14 +23,11 @@ def parse_tables(html_content):
     return dataframes
 
 def main():
-    st.title("S&P 500 PE Ratio by Month")
-
     html_content = fetch_data(url)
     if html_content:
         dataframes = parse_tables(html_content)
         
-        if dataframes:
-            st.dataframe(dataframes[0])
+        print(dataframes)
 
 if __name__ == "__main__":
     main()
