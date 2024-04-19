@@ -1,39 +1,54 @@
-import requests
-from bs4 import BeautifulSoup
-import pandas as pd
+import streamlit as st
+import json
+import matplotlib.pyplot as plt
 
-# URL of the page containing the market statistics
-url = "https://www.multpl.com/s-p-500-pe-ratio/table/by-month"
+# Load data from a JSON file or directly from a JSON string
+# Assuming the JSON data is stored in a file named 'data.json'
+# with open('data.json', 'r') as file:
+#     data = json.load(file)
 
-def fetch_data(url):
-    """Fetch and parse HTML data from the given URL."""
-    try:
-        response = requests.get(url)
-        response.raise_for_status()  # Check for request success
-        return response.text
-    except requests.RequestException as e:
-        return None
+# For the sake of example, let's assume we directly use the provided JSON data
+json_data = """
+{
+  "priceIndexData": [
+    {"x": {"label": "2019-01-01", "value": "2019-01-01"}, "y": {"max": {"label": "1,000", "value": 1000.0}, "mean": {"label": "1,000", "value": 1000.0}, "min": {"label": "1,000", "value": 1000.0}}},
+    {"x": {"label": "2019-01-02", "value": "2019-01-02"}, "y": {"max": {"label": "1,000", "value": 999.6742}, "mean": {"label": "1,000", "value": 999.6742}, "min": {"label": "1,000", "value": 999.6742}}},
+    {"x": {"label": "2019-01-03", "value": "2019-01-03"}, "y": {"max": {"label": "999", "value": 998.93896}, "mean": {"label": "999", "value": 998.93896}, "min": {"label": "999", "value": 998.93896}}},
+    // Add more data points as needed
+  ]
+}
+"""
 
-def parse_tables(html_content):
-    """Parse HTML tables into pandas DataFrames."""
-    soup = BeautifulSoup(html_content, 'html.parser')
-    tables = soup.find_all('table', id='datatable')
-    dataframes = [pd.read_html(str(table))[0] for table in tables if table]
-    return dataframes
+# Parse the JSON data
+data = json.loads(json_data)
 
-def main():
-    html_content = fetch_data(url)
-    if html_content:
-        dataframes = parse_tables(html_content)
-        
-        df = pd.DataFrame(dataframes[0])
+# Extract priceIndexData
+price_index_data = data['priceIndexData']
 
-        df['Date'] = pd.to_datetime(df['Date'])
+# Initialize lists to store the extracted values
+dates = []
+max_values = []
+mean_values = []
+min_values = []
 
-        df['Value'] = df['Value'].str.replace(r'[^\d.]', '', regex=True)
-        df['Value'] = pd.to_numeric(df['Value'], errors='coerce')
-        
-        print(df)
+# Extract values from the data
+for item in price_index_data:
+    dates.append(item['x']['label'])
+    max_values.append(item['y']['max']['value'])
+    mean_values.append(item['y']['mean']['value'])
+    min_values.append(item['y']['min']['value'])
 
-if __name__ == "__main__":
-    main()
+# Create a plot
+plt.figure(figsize=(10, 5))
+plt.plot(dates, max_values, label='Max Price Index')
+plt.plot(dates, mean_values, label='Mean Price Index')
+plt.plot(dates, min_values, label='Min Price Index')
+plt.xlabel('Date')
+plt.ylabel('Price Index')
+plt.title('Price Index Data Over Time')
+plt.xticks(rotation=45)
+plt.legend()
+plt.tight_layout()
+
+# Display the plot in Streamlit
+st.pyplot(plt)

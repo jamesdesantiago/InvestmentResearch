@@ -23,6 +23,17 @@ def parse_tables(html_content):
     dataframes = [pd.read_html(str(table))[0] for table in tables if table]
     return dataframes
 
+def clean_data(df):
+    """Clean and preprocess the DataFrame."""
+    df['Date'] = pd.to_datetime(df['Date'])
+    df['Value'] = df['Value'].str.replace(r'[^\d.]', '', regex=True)
+    df['Value'] = pd.to_numeric(df['Value'], errors='coerce')
+    return df
+
+def plot_data(df):
+    """Plot the data using a line chart."""
+    st.line_chart(df.set_index('Date')['Value'], height=400)
+
 def main():
     st.title("S&P 500 PE Ratio by Month")
 
@@ -31,15 +42,9 @@ def main():
         dataframes = parse_tables(html_content)
         
         if dataframes:
-            dataframes = parse_tables(html_content)
-        
             df = pd.DataFrame(dataframes[0])
-
-            df['Date'] = pd.to_datetime(df['Date'])
-
-            df['Value'] = df['Value'].str.replace(r'[^\d.]', '', regex=True)
-            df['Value'] = pd.to_numeric(df['Value'], errors='coerce')
-            st.line_chart(df.set_index('Date')['Value'], height=400)
+            df = clean_data(df)
+            plot_data(df)
 
 if __name__ == "__main__":
     main()
