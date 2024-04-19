@@ -35,6 +35,7 @@ def main():
             # Convert 'Date' column to datetime type
             df['Date'] = pd.to_datetime(df['Date'])
             df = df.sort_values('Date')
+            df.set_index('Date', inplace=True)
             st.line_chart(df.set_index('Date')['Value'])
 
 if __name__ == "__main__":
