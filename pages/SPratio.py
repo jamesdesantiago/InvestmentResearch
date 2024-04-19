@@ -31,9 +31,14 @@ def main():
         dataframes = parse_tables(html_content)
         
         if dataframes:
-            df = dataframes[0]
-            # Convert 'Date' column to datetime type
+            dataframes = parse_tables(html_content)
+        
+            df = pd.DataFrame(dataframes[0])
+
             df['Date'] = pd.to_datetime(df['Date'])
+
+            df['Value'] = df['Value'].str.replace(r'[^\d.]', '', regex=True)
+            df['Value'] = pd.to_numeric(df['Value'], errors='coerce')
             st.line_chart(df.set_index('Date')['Value'], height=400)
 
 if __name__ == "__main__":
