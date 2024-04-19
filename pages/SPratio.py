@@ -31,7 +31,7 @@ def main():
         dataframes = parse_tables(html_content)
         
         if dataframes:
-            st.dataframe(dataframes[0])
+            st.line_chart(dataframes[0].set_index('Date')['Value'])
 
 if __name__ == "__main__":
     main()
