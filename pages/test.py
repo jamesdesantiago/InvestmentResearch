@@ -12,7 +12,6 @@ def fetch_data(url):
         response.raise_for_status()  # Check for request success
         return response.text
     except requests.RequestException as e:
-        st.error(f"Failed to fetch data: {e}")
         return None
 
 def parse_tables(html_content):
@@ -27,7 +26,14 @@ def main():
     if html_content:
         dataframes = parse_tables(html_content)
         
-        print(dataframes)
+        df = pd.DataFrame(dataframes[0])
+
+        df['Date'] = pd.to_datetime(df['Date'])
+
+        df['Value'] = df['Value'].str.replace(r'[^\d.]', '', regex=True)
+        df['Value'] = pd.to_numeric(df['Value'], errors='coerce')
+        
+        print(df)
 
 if __name__ == "__main__":
     main()
