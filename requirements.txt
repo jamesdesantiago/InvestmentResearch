@@ -3,3 +3,4 @@ fredapi
 pandas
 plotly
 beautifulsoup4
+lxml
