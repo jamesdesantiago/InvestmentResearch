@@ -33,8 +33,9 @@ def main():
         if dataframes:
             df = dataframes[0]
             # Convert 'Date' column to datetime type
-            #df['Date'] = pd.to_datetime(df['Date'])
-            st.line_chart(dataframes[0].set_index('Date')['Value'])
+            df['Date'] = pd.to_datetime(df['Date'])
+            df = df.sort_values('Date')
+            st.line_chart(df.set_index('Date')['Value'])
 
 if __name__ == "__main__":
     main()
