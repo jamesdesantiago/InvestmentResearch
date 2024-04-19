@@ -6,7 +6,6 @@ import pandas as pd
 # URL of the page containing the market statistics
 url = "https://www.cboe.com/us/options/market_statistics/"
 
-@st.cache
 def fetch_data(url):
     """Fetch and parse HTML data from the given URL."""
     try:
