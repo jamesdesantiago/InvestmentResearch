@@ -67,7 +67,8 @@ def consumer_behavior(start_date, end_date):
     personal_consumption_expenditures = fred.get_series('PCEC96', observation_start=start_date, observation_end=end_date)
     commercial_bank_credit = fred.get_series('CCLACBW027SBOG', observation_start=start_date, observation_end=end_date)
     real_disposable_personal_income = fred.get_series('W875RX1', observation_start=start_date, observation_end=end_date)
-    retail_and_food_services_sales = fred.get_series('CMRMTSPL', observation_start=start_date, observation_end=end_date)
+    real_manufacturing_and_trade_industries_sales = fred.get_series('CMRMTSPL', observation_start=start_date, observation_end=end_date)
+    retail_sales_restaurants_and_other_eating_places = fred.get_series('MRTSSM7225USN', observation_start=start_date, observation_end=end_date)
 
     st.markdown("Real Personal Consumption Expenditures (Billions of Chained 2017 Dollars, Seasonally Adjusted Annual Rate)")
     st.line_chart(personal_consumption_expenditures)
@@ -76,7 +77,9 @@ def consumer_behavior(start_date, end_date):
     st.markdown("Real personal income excluding current transfer receipts (Billions of Chained 2017 Dollars, Seasonally Adjusted Annual Rate)")
     st.line_chart(real_disposable_personal_income)
     st.markdown("Real Manufacturing and Trade Industries Sales (Millions of Chained 2017 Dollars, Seasonally Adjusted)")
-    st.line_chart(retail_and_food_services_sales) 
+    st.line_chart(real_manufacturing_and_trade_industries_sales) 
+    st.markdown("Retail Sales: Food Services and Drinking Places (Millions of U.S. Dollars, Seasonally Adjusted)")
+    st.line_chart(retail_sales_restaurants_and_other_eating_places)
 
 
 def industrial_production(start_date, end_date):

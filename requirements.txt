@@ -4,3 +4,5 @@ pandas
 plotly
 beautifulsoup4
 lxml
+pandas_datareader
+matplotlib
